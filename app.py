@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request
 import numpy as np
 import pandas as pd
+from investment_sip import *
 
 app = Flask(__name__)
 
@@ -12,25 +13,30 @@ data = np.array((
 ))
 
 
-@app.route("/")
+@app.route("/login")
 def table():
     return render_template("./index.html", table_heading=headings, data=data)
 
-@app.route("/login", methods=["POST", "GET"])
+@app.route("/", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
-        perc1 = int(request.form['perc1'])
-        perc2 = int(request.form['perc2'])
-        perc3 = int(request.form['perc3'])
-        return redirect(url_for("user", perc1=perc1, perc2=perc2, perc3=perc3))
+        start_sip = int(request.form['start_sip'])
+        total_years = int(request.form['total_years'])
+        roi_list = [float(request.form[f'return{i+1}']) for i in range(3)]
+        yearly_raise_list = [float(request.form[f'incr{i+1}']) for i in range(2)]
+        investing_data = calculate_sip_returns(start_sip, total_years, roi_list, yearly_raise_list)
+        cols = investing_data.columns
+        return render_template("./result.html", investing_data=list(investing_data.itertuples(index=False)), cols=cols)
+        # return redirect(url_for("user", investing_data=investing_data, cols=cols))
     else:
-        return render_template("./login.html")    
+        return render_template("./sip.html")
 
 
+@app.route("/magic/<cols>/<investing_data>")
+def user(investing_data, cols):
+    # return render_template("result.html", investing_data=request.args.get('investing_data'), cols=request.args.get('cols'))
+    return render_template("./result.html", investing_data=list(investing_data.itertuples(index=False)), cols=cols)
 
-@app.route("/<perc1>,<perc2>,<perc3>")
-def user(perc1, perc2, perc3):
-    return f"<h1>{int(perc1)}, {int(perc2)}, {int(perc3)}</h1>"
 
 if __name__ == "__main__":
     app.run(debug=True)

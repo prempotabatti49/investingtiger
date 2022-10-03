@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="eng">
+</html>
+<body>
+<h1>Investing Playground: Result! Bam!!</h1>
+<table>
+    <tr>
+        {% for header in cols %}
+        <th>{{ header }}</th>
+        {% endfor %}
+    </tr>
+    {% for row in investing_data %}
+    <tr>
+        {% for cell in row %}
+        <td>
+            {{ cell }}
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+</form>
+</body>
