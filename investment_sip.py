@@ -16,7 +16,7 @@ def get_total_invested(monthly_sip_: int, yearly_raise_: float, total_years: int
 def calculate_sip_returns(
     start_sip: int=30000, 
     total_years: int=30, 
-    roi_list: list=[10, 12, 20, 25], 
+    roi_list: list=[10, 12, 20], 
     yearly_raise_list: list=[0, 10]
     ) -> np.array:
 
@@ -38,7 +38,7 @@ def calculate_sip_returns(
             money_invested = start_sip
 
             total_invested = get_total_invested(start_sip, yearly_raise, total_years)
-            condition_key = f"roi_{roi}%__yearly_raise_{yearly_raise}%__total_invested_Rs.{round(total_invested):,}"
+            condition_key = f"CAGR={roi}%; yearly SIP raise={yearly_raise}%; total invested=Rs.{round(total_invested):,}"
 
             #Total fund at the end of each year for the condition_key
             total_fund_at_each_year[condition_key] = []
@@ -52,18 +52,18 @@ def calculate_sip_returns(
                     monthly_sip = monthly_sip * (1.0 + yearly_raise/100)
                     total_fund_at_each_year[condition_key].append(total_fund)
                     yearly_sip_amount[condition_key].append(monthly_sip)
-                total_fund = total_fund * (1.0 + (roi/100) / 12) + monthly_sip
+                total_fund = total_fund * (1.0 + (roi/100)/12) + monthly_sip
                 money_invested = money_invested + monthly_sip
 
-            total_fund_at_each_year[condition_key].append(total_fund)
-            total_fund_combination[condition_key].append(total_fund)
+            total_fund_at_each_year[condition_key].append(round(total_fund))
+            total_fund_combination[condition_key].append(round(total_fund))
             yearly_sip_amount[condition_key].append(monthly_sip)
 
             print(f"----ROI: {roi}% AND Yearly_Raise: {yearly_raise}%----")
             print(f"total value of investment after {total_years} years at {roi}% CAGR would be {round(total_fund)}")
             print(f"Total money invested: Rs. {round(money_invested)}, with last monthly SIP = {monthly_sip}")
             print("------------------------------------------")
-    return pd.DataFrame(total_fund_at_each_year).round()
+    return pd.DataFrame(total_fund_at_each_year)
 
 
 # for combination in pd.DataFrame(total_fund_at_each_year).columns:

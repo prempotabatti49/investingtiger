@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="eng">
-</html>
-<body>
-<h1>Investing Playground: Result! Bam!!</h1>
-<table>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <style>
+        h1 {text-align: center; font-family: "Courier";}
+    </style>    
+</head>
+<body bgcolor="LightYellow" >
+<h1>Investing Playground: Results! Bam!!</h1>
+<!-- <table>
     <tr>
         {% for header in cols %}
         <th>{{ header }}</th>
@@ -18,6 +26,77 @@
         {% endfor %}
     </tr>
     {% endfor %}
-</table>
-</form>
+</table> -->
+<center>
+<canvas id="lineChart" width="1200" height="600"></canvas>
+</center>
+<script>
+    var ctx = document.getElementById("lineChart").getContext("2d");
+    var column_names = {{ cols | safe }}
+    var color_palette = {{ color_palette | safe }}
+    var lineChart = new Chart(ctx, {
+        type: "line",
+        // options: {
+        //     scales: {
+        //         yAxes: [{
+        //             scaleLabel: {
+        //                 display: True,
+        //                 text: "Total Fund"
+        //             }
+        //         }]
+        //     }
+        // }
+        data: {
+            labels: {{ labels | safe }},
+            datasets: [
+                {
+                    label: column_names[0],
+                    data: {{ values1 | safe }},
+                    fill: false,
+                    borderColor: color_palette[0],
+                    lineTension: 0.1
+                },
+                {
+                    label: column_names[1],
+                    data: {{ values2 | safe }},
+                    fill: false,
+                    borderColor: color_palette[1],
+                    lineTension: 0.1
+                },
+                {
+                    label: column_names[2],
+                    data: {{ values3 | safe }},
+                    fill: false,
+                    borderColor: color_palette[2],
+                    lineTension: 0.1
+                },
+                {
+                    label: column_names[3],
+                    data: {{ values4 | safe }},
+                    fill: false,
+                    borderColor: color_palette[3],
+                    lineTension: 0.1
+                },
+                {
+                    label: column_names[4],
+                    data: {{ values5 | safe }},
+                    fill: false,
+                    borderColor: color_palette[4],
+                    lineTension: 0.1
+                },
+                {
+                    label: column_names[5],
+                    data: {{ values6 | safe }},
+                    fill: false,
+                    borderColor: color_palette[5],
+                    lineTension: 0.1
+                },
+            ]
+        },
+        options: {
+            responsive: false
+        }
+    });
+</script>
 </body>
+</html>

@@ -24,9 +24,37 @@ def login():
         total_years = int(request.form['total_years'])
         roi_list = [float(request.form[f'return{i+1}']) for i in range(3)]
         yearly_raise_list = [float(request.form[f'incr{i+1}']) for i in range(2)]
-        investing_data = calculate_sip_returns(start_sip, total_years, roi_list, yearly_raise_list)
-        cols = investing_data.columns
-        return render_template("./result.html", investing_data=list(investing_data.itertuples(index=False)), cols=cols)
+        investing_data_ = calculate_sip_returns(start_sip, total_years, roi_list, yearly_raise_list)
+        cols_ = investing_data_.columns.tolist()
+        color_palette = ["gainsboro", "lightblue", "gold", "darkorange", "crimson", "maroon"]
+        # data=[
+        #     ("01-01-2020", 1597),
+        #     ("02-01-2020", 1456),
+        #     ("03-01-2020", 1908),
+        #     ("04-01-2020", 896)
+        # ]
+        labels = [f"{i+1}" for i in range(total_years)]
+        # labels = [row[0] for row in data]
+        # values = [row[1] for row in data]
+        return render_template(
+            "./result.html", 
+            investing_data=list(investing_data_.itertuples(index=False)), 
+            cols=cols_,
+            labels=labels,
+            values1=investing_data_[cols_[0]].tolist(),
+            values2=investing_data_[cols_[1]].tolist(),
+            values3=investing_data_[cols_[2]].tolist(),
+            values4=investing_data_[cols_[3]].tolist(),
+            values5=investing_data_[cols_[4]].tolist(),
+            values6=investing_data_[cols_[5]].tolist(),
+            legend1=str(cols_[0]),
+            legend2=cols_[1],
+            legend3=cols_[2],
+            legend4=cols_[3],
+            legend5=cols_[4],
+            legend6=cols_[5],
+            color_palette=color_palette
+        )
         # return redirect(url_for("user", investing_data=investing_data, cols=cols))
     else:
         return render_template("./sip.html")
