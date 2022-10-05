@@ -1,8 +1,30 @@
 <!DOCTYPE html>
 <html lang="eng">
-</html>
+<head>
+    <style>
+        .highlighttext {
+            color: salmon;
+        }
+        .highlighttextoutput {
+            color: crimson;
+        }
+    </style>
+</head>
+
 <body bgcolor="LightYellow">
-<h1>Investing Playground</h1>
+<center>
+<br>
+<h1><span style="color:darkorange">Investing Tiger</span>: An investing playground for fun</h1>
+<br>
+<h2>Albert Einstein once said, <span style="color:darkorange">Compound interest is the eighth wonder of the world. He who understands it, earns it; he who doesn't, pays it</span></h1> 
+<h3>We did not understand him first, like most of his other theories! Duh! So, we went ahead and tried it ourselves. 
+<h3>We asked ourselves a question - how much would our money grow if we invest <span class="highlighttext">Rs. 30k</span> every month for <span class="highlighttext">10 years</span> at an expected returns of <span class="highlighttext">10% per annum</span>? We would have invested 36 Lakhs and we would get <span class="highlighttextoutput">~Rs. 61 lakh</span> at the end! Impressive!</h3>
+<h3>Then we asked - how much would our money grow in the same scenario but if we kept <span class="highlighttext">increasing the SIP amount by 10% every year</span>. We would have invested ~57 lakhs and we would get <span class="highlighttextoutput">~90 lakh</span>! Not too bad! </h3>
+<h3>Now we became curious (and greedy)! We wanted to see how our money would grow for <span class="highlighttext">20 years or, let's say, 30 years</span> and what if our returns were more than just 10%, let's say, <span class="highlighttext">15% or 25%</span> (that's Warren Buffet level returns btw!)</h3>
+<h3>Very tiresome to iterate again and again, right? Why don't you put these numbers in the form below and see the results in a nice graph for yourself?</h3>
+<h3>Oh and we saw the numbers and, to quote Mr. Ranvijay from Roadies, "We were stunned!", because now we understand what Einstein meant!</h3>
+<br>
+<h2>-------------------------</h2>
 <form action="#", method="post">
     <p>Starting monthly SIP:  <input type="number", name="start_sip", value="30000">INR</p>
     <p>Total tenure (in years): <input type="number", name="total_years", value="30"> years</p>
@@ -10,4 +32,6 @@
     <p>Yearly increment in SIP (in %): <input type="number", name="incr1", value="0">%&nbsp&nbsp&nbsp&nbsp <input type="number", name="incr2", value="10">% </p>
     <p><input type="submit", name="submit"></p>
 </form>
+</center>
 </body>
+</html>
