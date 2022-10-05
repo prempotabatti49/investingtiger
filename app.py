@@ -15,7 +15,7 @@ data = np.array((
 
 @app.route("/login")
 def table():
-    return render_template("./index.html", table_heading=headings, data=data)
+    return render_template("./test.html", table_heading=headings, data=data)
 
 @app.route("/", methods=["POST", "GET"])
 def login():
@@ -51,13 +51,13 @@ def login():
         )
         # return redirect(url_for("user", investing_data=investing_data, cols=cols))
     else:
-        return render_template("./sip.html")
+        return render_template("./index.html")
 
 
-@app.route("/magic/<cols>/<investing_data>")
-def user(investing_data, cols):
-    # return render_template("result.html", investing_data=request.args.get('investing_data'), cols=request.args.get('cols'))
-    return render_template("./result.html", investing_data=list(investing_data.itertuples(index=False)), cols=cols)
+# @app.route("/magic/<cols>/<investing_data>")
+# def user(investing_data, cols):
+#     # return render_template("result.html", investing_data=request.args.get('investing_data'), cols=request.args.get('cols'))
+#     return render_template("./result.html", investing_data=list(investing_data.itertuples(index=False)), cols=cols)
 
 
 if __name__ == "__main__":
