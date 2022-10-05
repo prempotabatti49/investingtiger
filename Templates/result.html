@@ -36,16 +36,6 @@
     var color_palette = {{ color_palette | safe }}
     var lineChart = new Chart(ctx, {
         type: "line",
-        // options: {
-        //     scales: {
-        //         yAxes: [{
-        //             scaleLabel: {
-        //                 display: True,
-        //                 text: "Total Fund"
-        //             }
-        //         }]
-        //     }
-        // }
         data: {
             labels: {{ labels | safe }},
             datasets: [
@@ -94,7 +84,25 @@
             ]
         },
         options: {
-            responsive: false
+            responsive: false,
+            scales: {
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Year",
+                        fontColor: "darkgrey",
+                        fontSize: 18,
+                    }
+                }],
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Total Fund Value",
+                        fontColor: "darkgrey",
+                        fontSize: 18,
+                    },
+                }]
+            }
         }
     });
 </script>

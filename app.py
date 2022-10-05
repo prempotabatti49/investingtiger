@@ -47,12 +47,6 @@ def login():
             values4=investing_data_[cols_[3]].tolist(),
             values5=investing_data_[cols_[4]].tolist(),
             values6=investing_data_[cols_[5]].tolist(),
-            legend1=str(cols_[0]),
-            legend2=cols_[1],
-            legend3=cols_[2],
-            legend4=cols_[3],
-            legend5=cols_[4],
-            legend6=cols_[5],
             color_palette=color_palette
         )
         # return redirect(url_for("user", investing_data=investing_data, cols=cols))
